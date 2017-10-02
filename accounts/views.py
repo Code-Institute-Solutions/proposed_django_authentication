@@ -10,8 +10,8 @@ from django.contrib.auth.decorators import login_required
 def index(request):
     """A view that displays the index page"""
     return render(request, "index.html")
-    
-    
+
+
 def logout(request):
     """A view that logs the user out and redirects back to the index page"""
     auth.logout(request)
@@ -24,7 +24,7 @@ def login(request):
     if request.method == 'POST':
         user_form = UserLoginForm(request.POST)
         if user_form.is_valid():
-            user = auth.authenticate(username=request.POST['username_or_email'],
+            user = auth.authenticate(request.POST['username_or_email'],
                                      password=request.POST['password'])
 
             if user:
@@ -58,7 +58,7 @@ def register(request):
         if user_form.is_valid():
             user_form.save()
 
-            user = auth.authenticate(username=request.POST.get('username'),
+            user = auth.authenticate(request.POST.get('email'),
                                      password=request.POST.get('password1'))
 
             if user:
