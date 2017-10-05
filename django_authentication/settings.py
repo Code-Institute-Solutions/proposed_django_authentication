@@ -132,3 +132,7 @@ STATICFILES_DIRS = (
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# We need to override the default message storage, since cloud9 has a cookie bug
+# https://stackoverflow.com/a/34828308/493553
+MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
